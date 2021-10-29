@@ -12,7 +12,7 @@ const savePostRouter = require("./routes/savepost");
 const reportRouter = require("./routes/report");
 const conversationRouter = require("./routes/conversation");
 const messageRouter = require("./routes/message");
-
+const mailRouter = require("./routes/mail");
 mongoose.connect(process.env.MONGODB_URL, () => {
   console.log("connect db success");
 });
@@ -27,7 +27,7 @@ app.use("/api/savepost", savePostRouter);
 app.use("/api/report", reportRouter);
 app.use("/api/conversation", conversationRouter);
 app.use("/api/message", messageRouter);
-
+app.use("/api/email",mailRouter); 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Sever Running at ${PORT}`);
