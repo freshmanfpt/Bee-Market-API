@@ -4,10 +4,29 @@ const SavePost = require("../models/SavePost");
 //Create a post
 router.post("/", async (req, res) => {
   try {
-    const { postID, userID } = req.body;
+    const {
+      user,
+      title,
+      price,
+      category,
+      image,
+      images,
+      description,
+      phone,
+      address,
+      userID,
+    } = req.body;
     const newSavePost = new SavePost({
-      userID: userID,
-      postID: postID,
+      user,
+      title,
+      price,
+      category,
+      image,
+      images,
+      description,
+      phone,
+      address,
+      userID,
     });
     await newSavePost.save();
     res.status(200).send(newSavePost);
@@ -30,9 +49,7 @@ router.delete("/:id", async (req, res) => {
 router.get("/:userID", async (req, res) => {
   try {
     const { userID } = req.params;
-    const savepostList = await SavePost.find({ userID: userID }).populate(
-      "postID"
-    );
+    const savepostList = await SavePost.find({ user: userID });
     res.status(200).json(savepostList);
   } catch (err) {
     res.status(500).json(err);

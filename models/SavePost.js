@@ -2,17 +2,50 @@ const mongoose = require("mongoose");
 
 const SavePostSchema = new mongoose.Schema(
   {
-    userID: {
+    user: {
       type: "String",
       required: "true",
     },
-    postID: {
-      type: mongoose.Schema.Types.ObjectId,
+    title: {
+      type: String,
       required: true,
-      ref: "Post",
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    category: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
+      required: true,
+    },
+    images: {
+      type: Array,
+      required: true,
+    },
+    description: {
+      type: String,
+      default: "",
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    userID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
 module.exports = mongoose.model("SavePost", SavePostSchema);
