@@ -24,6 +24,7 @@ const reportRouter = require("./routes/report");
 const conversationRouter = require("./routes/conversation");
 const messageRouter = require("./routes/message");
 const mailRouter = require("./routes/mail");
+const categoryRouter = require("./routes/category");
 
 mongoose.connect(process.env.MONGODB_URL, () => {
   console.log("connect db success");
@@ -40,6 +41,7 @@ app.use("/api/report", reportRouter);
 app.use("/api/conversation", conversationRouter);
 app.use("/api/message", messageRouter);
 app.use("/api/email", mailRouter);
+app.use("/api/category", categoryRouter);
 
 const PORT = process.env.PORT;
 httpServer.listen(PORT, () => {
