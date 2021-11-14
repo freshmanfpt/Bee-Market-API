@@ -12,8 +12,42 @@ const io = new Server(httpServer, {
   /* options */
 });
 
-io.on("connect", (socket) => {
-  log("socket on", socket);
+let users = [];
+
+const addUser = (userId, socketId) => {
+  !users.some((user) => user.userId === userId) &&
+    users.push({ userId, socketId });
+};
+
+const removeUser = (socketId) => {
+  users = users.filter((user) => user.socketId !== socketId);
+};
+
+const getUser = (userId) => {
+  return users.find((user) => user.userId === userId);
+};
+
+io.on("connection", (socket) => {
+  console.log("a user connected :D");
+  socket.on("addUser", (userID) => {
+    addUser(userID, socket.id);
+    io.emit("getUser", users);
+  });
+  //send and get message
+  socket.on("sendMessage", ({ senderId, receiverId, text }) => {
+    const user = getUser(receiverId);
+    io.to(user.socketId).emit("getMessage", {
+      senderId,
+      text,
+    });
+  });
+
+  //when disconnect
+  socket.on("disconnect", () => {
+    console.log("a user disconnected!");
+    removeUser(socket.id);
+    io.emit("getUsers", users);
+  });
 });
 
 const userRouter = require("./routes/users");
