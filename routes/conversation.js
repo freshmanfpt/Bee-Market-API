@@ -14,10 +14,24 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/:userID", async (req, res) => {
+router.get("/getConversation/:userID", async (req, res) => {
   try {
     const conversation = await Conversation.find({
       members: { $in: [req.params.userID] },
+    });
+    res.status(200).json(conversation);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/checkConversation", async (req, res) => {
+  let userID = req.query.userID;
+  let receiverID = req.query.receiverID;
+  console.log(req.query);
+  try {
+    const conversation = await Conversation.find({
+      members: [userID, receiverID],
     });
     res.status(200).json(conversation);
   } catch (err) {
