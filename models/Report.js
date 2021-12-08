@@ -16,6 +16,11 @@ const ReportSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    reporterID:{
+      type: mongoose.Schema.Types.ObjectId,
+      required: "true",
+      ref: "User",
+    },
   },
   { timestamps: true }
 );

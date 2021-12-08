@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 //REGISTER
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password, avatar, isAdmin, address, phone } = req.body;
+    const { name, email, password, avatar, isAdmin, address, phone,isBlocked ,place} = req.body;
 
     //Check
     const emailCheck = await User.findOne({ email: email });
@@ -24,6 +24,8 @@ router.post("/register", async (req, res) => {
       isAdmin: isAdmin,
       address: address,
       phone: phone,
+      isBlocked: isBlocked,
+      place: place,
     });
     await user.save();
     res.status(200).json(user);

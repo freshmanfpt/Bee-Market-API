@@ -32,6 +32,14 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    isBlocked:{
+      type: Boolean,
+      default :false,
+    },
+    place:{
+      type: String,
+      default: "",
+    },
     dateJoin: {
       type: "String",
       default: getDDMMYYYY,
