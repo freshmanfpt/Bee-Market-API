@@ -63,6 +63,7 @@ const messageRouter = require("./routes/message");
 const mailRouter = require("./routes/mail");
 const categoryRouter = require("./routes/category");
 const notificationRouter = require("./routes/notification");
+const sortRouter = require("./routes/sort");
 
 mongoose.connect(process.env.MONGODB_URL, () => {
   console.log("connect db success");
@@ -81,6 +82,7 @@ app.use("/api/message", messageRouter);
 app.use("/api/email", mailRouter);
 app.use("/api/category", categoryRouter);
 app.use("/api/notification", notificationRouter);
+app.use("/api/sort", sortRouter);
 
 const PORT = process.env.PORT;
 httpServer.listen(PORT, () => {
