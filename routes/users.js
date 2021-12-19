@@ -24,7 +24,7 @@ router.put("/password/:id", async (req, res) => {
       req.body.passwordOld,
       user.password
     );
-    !validPassword && res.status(400).send("Wrong pass");
+    !validPassword && res.status(200).json({ password: false });
     await User.findByIdAndUpdate(req.params.id, {
       password: hashPass,
     });
