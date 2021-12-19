@@ -7,8 +7,8 @@ const transporter = mailerService.createTransport({
     ignoreTLS: true,
     secure: true,
     auth: {
-      user: 'beemarketpoly@gmail.com',
-      pass: 'Thanh123',
+      user: 'thanhptph12015@fpt.edu.vn',
+      pass: 'mritachi123',
     },
 });
 router.post("/send", async (req, res) => {
@@ -23,9 +23,11 @@ router.post("/send", async (req, res) => {
 });
 router.post("/forgot", async (req, res) => {
     const email = req.body.email;
+    const code = makeid();
+    console.log(email);
     try {
-        const status = await forgotEmail(email);
-      res.status(200).json(status);
+        const status = await forgotEmail(email,code);
+      res.status(200).json({email,code});
     } catch (err) {
       res.status(500).json(err);
     }
@@ -42,15 +44,27 @@ async function sendEmail(email, username) {
     }
     else throw 'Invalid Mail';
 };
-async function forgotEmail(email) {
+async function forgotEmail(email,code) {
     if (re.test(email.toLowerCase())) {
         return await transporter.sendMail({
             to: email,
             from: '"Beemarket" <no-reply@localhost>',
             subject: 'Quên mật khẩu Bee Market',
-            html: `<h4><a href="http://localhost:3000">Bấm vào đây để reset mật khẩu</a></h4>`,
+            html: `
+            <span>Mã đổi mật khẩu của bạn là ${code}</span>`,
         });
     }
     else throw 'Invalid Mail';
+}
+
+function makeid() {
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < 6; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * 
+charactersLength));
+ }
+ return result;
 }
 module.exports = router;
