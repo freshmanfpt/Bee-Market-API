@@ -20,11 +20,13 @@ router.put("/password/:id", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashPass = await bcrypt.hash(req.body.password, salt);
     const user = await User.findById(req.params.id);
-    const validPassword = await bcrypt.compare(
-      req.body.passwordOld,
-      user.password
-    );
-    !validPassword && res.status(200).json({ password: false });
+    if (req.body.passwordOld) {
+      const validPassword = await bcrypt.compare(
+        req.body.passwordOld,
+        user.password
+      );
+      !validPassword && res.status(200).json({ password: false });
+    }
     await User.findByIdAndUpdate(req.params.id, {
       password: hashPass,
     });
