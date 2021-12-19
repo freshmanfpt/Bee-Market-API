@@ -19,6 +19,12 @@ router.put("/password/:id", async (req, res) => {
     //Hash password
     const salt = await bcrypt.genSalt(10);
     const hashPass = await bcrypt.hash(req.body.password, salt);
+    const user = await User.findById(req.params.id);
+    const validPassword = await bcrypt.compare(
+      req.body.passwordOld,
+      user.password
+    );
+    !validPassword && res.status(400).send("Wrong pass");
     await User.findByIdAndUpdate(req.params.id, {
       password: hashPass,
     });
