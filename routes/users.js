@@ -5,11 +5,49 @@ const bcrypt = require("bcrypt");
 //Update User
 router.put("/:id", async (req, res) => {
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, {
+    await User.findByIdAndUpdate(req.params.id, {
       $set: req.body,
     });
     res.status(200).json("Account has been updated");
   } catch (err) {
+    return res.status(500).json(err);
+  }
+});
+
+router.put("/password/:id", async (req, res) => {
+  try {
+    //Hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashPass = await bcrypt.hash(req.body.password, salt);
+    await User.findByIdAndUpdate(req.params.id, {
+      password: hashPass,
+    });
+    res.status(200).json("Account has been updated");
+  } catch (error) {
+    return res.status(500).json(err);
+  }
+});
+
+router.put("/block/:id", async (req, res) => {
+  try {
+    //Hash password
+    await User.findByIdAndUpdate(req.params.id, {
+      isBlocked: true,
+    });
+    res.status(200).json("Account has been updated");
+  } catch (error) {
+    return res.status(500).json(err);
+  }
+});
+
+router.put("/unblock/:id", async (req, res) => {
+  try {
+    //Hash password
+    await User.findByIdAndUpdate(req.params.id, {
+      isBlocked: false,
+    });
+    res.status(200).json("Account has been updated");
+  } catch (error) {
     return res.status(500).json(err);
   }
 });
@@ -28,6 +66,16 @@ router.delete("/:id", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
+    const { password, updatedAt, ...other } = user._doc;
+    res.status(200).json(other);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/place/:place", async (req, res) => {
+  try {
+    const user = await User.find({ place: req.params.place });
     const { password, updatedAt, ...other } = user._doc;
     res.status(200).json(other);
   } catch (err) {
