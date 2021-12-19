@@ -39,7 +39,8 @@ async function sendEmail(email, username) {
             from: '"BeeMarket" <no-reply@localhost>',
             subject: 'Tạo tài khoản trên Bee Market',
             html: `<h2>Tài khoản của bạn được tạo thành công bây giờ bạn có đăng nhập vào ứng dụng</h2>
-                    <span>Tài khoản của bạn là ${username}</span>`,
+                    <span>Tài khoản của bạn là ${username}`
+                    ,
         });
     }
     else throw 'Invalid Mail';
@@ -51,7 +52,7 @@ async function forgotEmail(email,code) {
             from: '"Beemarket" <no-reply@localhost>',
             subject: 'Quên mật khẩu Bee Market',
             html: `
-            <span>Mã đổi mật khẩu của bạn là ${code}</span>`,
+            <span>Mã đổi mật khẩu của bạn là <h3>${code}</h3></span></span><br>Form BeeMarketSupport</br>`,
         });
     }
     else throw 'Invalid Mail';
