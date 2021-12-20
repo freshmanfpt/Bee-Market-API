@@ -22,8 +22,8 @@ const ReportSchema = new mongoose.Schema(
       required: "true",
       ref: "User",
     },
-    status:{
-      type:Boolean,
+    state:{
+      type:String,
       required:"true"
     }
   },
