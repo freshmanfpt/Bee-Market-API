@@ -4,12 +4,12 @@ const Report = require("../models/Report");
 //Create a post
 router.post("/", async (req, res) => {
   try {
-    const { postID, userID, content ,reporterID,state} = req.body;
+    const { reporterID, postReported, content ,reporterPersonID,state} = req.body;
     const newReport = new Report({
-      userID: userID,
-      postID: postID,
+      reporterID: reporterID,
+      postReported: postReported,
       content: content,
-      reporterID:reporterID,
+      reporterPersonID:reporterPersonID,
       state:state,
     });
     await newReport.save();

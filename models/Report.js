@@ -3,12 +3,12 @@ const { required } = require("nodemon/lib/config");
 
 const ReportSchema = new mongoose.Schema(
   {
-    userID: {
+    reporterID: {
       type: mongoose.Schema.Types.ObjectId,
       required: "true",
       ref: "User",
     },
-    postID: {
+    postReported: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "Post",
@@ -17,7 +17,7 @@ const ReportSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    reporterID:{
+    reporterPersonID:{
       type: mongoose.Schema.Types.ObjectId,
       required: "true",
       ref: "User",
