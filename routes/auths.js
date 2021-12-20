@@ -5,11 +5,21 @@ const bcrypt = require("bcrypt");
 //REGISTER
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password, avatar, isAdmin, address, phone,isBlocked ,place} = req.body;
+    const {
+      name,
+      email,
+      password,
+      avatar,
+      isAdmin,
+      address,
+      phone,
+      isBlocked,
+      place,
+    } = req.body;
 
     //Check
     const emailCheck = await User.findOne({ email: email });
-    emailCheck && res.status(404).send("Email exist");
+    emailCheck && res.status(200).json({ isExist: true });
 
     //Hash password
     const salt = await bcrypt.genSalt(10);
