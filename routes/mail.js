@@ -28,10 +28,13 @@ router.post("/forgot", async (req, res) => {
   const code = makeid();
   const emailCheck = await User.findOne({ email: req.body.email });
   emailCheck && res.status(200).json({ isExist: false });
-  console.log(emailCheck);
   try {
+    if(emailCheck){
     const status = await forgotEmail(email, code);
     res.status(200).json({ email, code, userID: emailCheck._id });
+    } else {
+      res.status(200).json({ isExist: false });
+    }
   } catch (err) {
     res.status(500).json(err);
   }
