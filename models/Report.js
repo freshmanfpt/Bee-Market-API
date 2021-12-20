@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { required } = require("nodemon/lib/config");
 
 const ReportSchema = new mongoose.Schema(
   {
@@ -21,6 +22,10 @@ const ReportSchema = new mongoose.Schema(
       required: "true",
       ref: "User",
     },
+    status:{
+      type:Boolean,
+      required:"true"
+    }
   },
   { timestamps: true }
 );
