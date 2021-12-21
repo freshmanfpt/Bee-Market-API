@@ -71,7 +71,7 @@ router.get("/", async (req, res) => {
     const postList = await Post.find().populate({
       path: "userID",
       select: "-password",
-    }).sort( {'timestamp': -1});
+    }).sort({ createdAt: -1 });
 
     res.status(200).json(postList);
   } catch (err) {
