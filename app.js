@@ -64,7 +64,8 @@ const mailRouter = require("./routes/mail");
 const categoryRouter = require("./routes/category");
 const notificationRouter = require("./routes/notification");
 const sortRouter = require("./routes/sort");
-
+const productRouter = require("./routes/product");
+const orderRouter = require("./routes/order");
 mongoose.connect(process.env.MONGODB_URL, () => {
   console.log("connect db success");
 });
@@ -83,7 +84,8 @@ app.use("/api/email", mailRouter);
 app.use("/api/category", categoryRouter);
 app.use("/api/notification", notificationRouter);
 app.use("/api/sort", sortRouter);
-
+app.use("/api/product", productRouter);
+app.use("/api/order", orderRouter);
 const PORT = process.env.PORT;
 httpServer.listen(PORT, () => {
   console.log(`Sever Running at ${PORT}`);
