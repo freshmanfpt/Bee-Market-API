@@ -5,22 +5,34 @@ const Product = require("../models/Product");
 router.post("/", async (req, res) => {
   try {
     const {
-        name,
+        userID,
+        title,
         category,
         priceIn,
         priceOut,
+        description,
+        phone,
+        address,
+        image,
+        images,
         dateIn,
         dateOut,
         status,
     } = req.body;
     const newProduct = new Product({
-    name: name,
-      category: category,
-      priceIn: priceIn,
-      priceOut: priceOut,
-      dateIn: dateIn,
-      dateOut: dateOut,
-      status: status,
+      userID : userID,
+      title : title,
+      category : category,
+      priceIn : priceIn,
+      priceOut : priceOut,
+      description : description,
+      phone : phone,
+      address : address,
+      image : image,
+      images : images,
+      dateIn : dateIn,
+      dateOut : dateOut,
+      status : status,
     });
     await newProduct.save();
     res.status(200).send(newProduct);
