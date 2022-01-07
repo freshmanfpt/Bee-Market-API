@@ -85,13 +85,14 @@ router.get("/", async (req, res) => {
 
 //Get Product of Category
 router.get("/all/:category", async (req, res) => {
+  console.log(req.params);
   try {
     const { category } = req.params;
     const productList = await Product.find({ category: category });
     const productCount = await Product.find({ category: category }).count({});
     res.status(200).json({
-      productList: productList,
       productCount: productCount,
+      productList: productList,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -114,6 +115,7 @@ router.get("/sales/:category", async (req, res) => {
         sales: total,
         profit :  profit,
         productCount: productCount,
+        productList: productList
       });
     } catch (err) {
       res.status(500).json(err);
