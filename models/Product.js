@@ -6,6 +6,7 @@ const ProductSchema = new mongoose.Schema(
     userID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      default:"admin"
     },
     title: {
       type: String,
@@ -45,7 +46,7 @@ const ProductSchema = new mongoose.Schema(
     },
     dateIn: {
         type: String,
-        default: getHHMMDDMMYYY,
+        default: getDDMMYYYY,
     },
     dateOut: {
         type: String,
