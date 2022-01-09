@@ -28,14 +28,6 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
-    phone: {
-      type: String,
-      required: true,
-    },
-    address: {
-      type: String,
-      required: true,
-    },
     image: {
       type: String,
       required: true,
