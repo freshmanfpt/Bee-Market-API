@@ -66,6 +66,7 @@ const notificationRouter = require("./routes/notification");
 const sortRouter = require("./routes/sort");
 const productRouter = require("./routes/product");
 const orderRouter = require("./routes/order");
+const saveProductRouter = require("./routes/saveproduct");
 mongoose.connect(process.env.MONGODB_URL, () => {
   console.log("connect db success");
 });
@@ -86,6 +87,7 @@ app.use("/api/notification", notificationRouter);
 app.use("/api/sort", sortRouter);
 app.use("/api/product", productRouter);
 app.use("/api/order", orderRouter);
+app.use("/api/saveproduct", saveProductRouter);
 const PORT = process.env.PORT;
 httpServer.listen(PORT, () => {
   console.log(`Sever Running at ${PORT}`);
