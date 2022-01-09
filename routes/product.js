@@ -122,4 +122,26 @@ router.get("/sales/:category", async (req, res) => {
       res.status(500).json(err);
     }
   });
+router.get("/sales", async (req, res) => {
+    try {
+    let total = 0;
+    let profit = 0;
+      const { category } = req.params;
+      const productList = await Product.find({ status : "Da ban"});
+      const productCount = await Product.find({ status : "Da ban"}).count({});
+     productList.map((x)=>{
+         profit = profit + parseInt(x.priceIn); 
+         total = total +  parseInt(x.priceOut); 
+     })
+     profit = total - profit;
+      res.status(200).json({
+        sales: total,
+        profit :  profit,
+        productCount: productCount,
+        productList: productList
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
 module.exports = router;
