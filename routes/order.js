@@ -8,12 +8,14 @@ router.post("/", async (req, res) => {
         products,
         totalPrice,
         buyer,
+        address,
         status,
     } = req.body;
     const newOrder = new Order({
         products: products,
         totalPrice: totalPrice,
         buyer: buyer,
+        address : address,
         status: status,
     });
     await newOrder.save();

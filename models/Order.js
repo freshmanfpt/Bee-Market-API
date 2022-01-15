@@ -18,6 +18,10 @@ const OrderSchema = new mongoose.Schema(
         type: "String",
         default: getDDMMYYYY,
     },
+    address:{
+      type: String,
+      default: "",
+    },
     status: {
       type: String,
       default: "",
