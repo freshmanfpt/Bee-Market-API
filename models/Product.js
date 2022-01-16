@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { getDDMMYYYY } = require("../until/getDateNow");
-
+const { getHHMMDDMMYYY } = require("../until/getDateNow");
 const ProductSchema = new mongoose.Schema(
   {
     userID: {
@@ -17,12 +17,12 @@ const ProductSchema = new mongoose.Schema(
         default: "",
     },
     priceIn: {
-        type: String,
-        default: "",
+        type: Number,
+        required: true,
     },
     priceOut: {
-        type: String,
-      default: "",
+        type: Number,
+        required: true,
     },
     description: {
       type: String,
@@ -37,8 +37,8 @@ const ProductSchema = new mongoose.Schema(
       required: true,
     },
     dateIn: {
-        type: String,
-        default: getDDMMYYYY,
+      type: "String",
+        default: getHHMMDDMMYYY,
     },
     dateOut: {
         type: String,
