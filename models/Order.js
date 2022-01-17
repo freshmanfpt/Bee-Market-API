@@ -14,6 +14,10 @@ const OrderSchema = new mongoose.Schema(
         type: String,
       default: "",
     },
+    userID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     orderDate: {
         type: "String",
         default: getDDMMYYYY,
