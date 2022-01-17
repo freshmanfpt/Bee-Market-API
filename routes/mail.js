@@ -9,8 +9,8 @@ const transporter = mailerService.createTransport({
   ignoreTLS: true,
   secure: true,
   auth: {
-    user: "thanhptph12015@fpt.edu.vn",
-    pass: "mritachi123",
+    user: "beemarketpoly@gmail.com",
+    pass: "beemarket123",
   },
 });
 router.post("/send", async (req, res) => {
