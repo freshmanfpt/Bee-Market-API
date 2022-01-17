@@ -9,6 +9,7 @@ router.post("/", async (req, res) => {
         totalPrice,
         buyer,
         address,
+        phone,
         status,
     } = req.body;
     const newOrder = new Order({
@@ -16,6 +17,7 @@ router.post("/", async (req, res) => {
         totalPrice: totalPrice,
         buyer: buyer,
         address : address,
+        phone: phone,
         status: status,
     });
     await newOrder.save();
